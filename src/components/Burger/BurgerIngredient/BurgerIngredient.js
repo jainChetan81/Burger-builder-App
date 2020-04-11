@@ -31,12 +31,12 @@ class BurgerIngredient extends Component {
                 ingredient = <div className={classes.Salad}></div>;
                 break;
             default:
-                ingredients = none;
+                ingredient = null;
         }
         return ingredient;
     }
 }
-BurgerIngredient.PropTypes = {
+BurgerIngredient.propTypes = {
     type: PropTypes.string.isRequired,
 };
 export default BurgerIngredient;
