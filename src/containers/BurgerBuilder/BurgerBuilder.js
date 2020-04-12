@@ -15,21 +15,28 @@ class BurgerBuilder extends React.Component {
     state = {
         ingredients: {
             salad: 0,
-            bacon: 1,
-            cheese: 1,
-            meat: 1,
+            bacon: 0,
+            cheese: 0,
+            meat: 0,
         },
-        totalPrice: 3,
+        totalPrice: 0,
         purchasable: false,
+        purchasing: false,
     };
-    updatePurchaseState(ingredients) {
+
+    purchaseHandler = () => {
+        this.setState({
+            purchasing: !this.state.purchasing,
+        });
+    };
+    updatePurchaseState = (ingredients) => {
         console.log("before doing stuff with ingredients: ", ingredients);
         const sum = Object.keys(ingredients)
             .map((igKey) => ingredients[igKey])
             .reduce((sum, el) => sum + el, 0); //todo:represents total amount of ingedients
         console.log(" after doing stuff with ingredients: ", sum);
         this.setState({ purchasable: sum > 0 });
-    }
+    };
     addIngredientHandler = (type) => {
         const updatedCount = this.state.ingredients[type] + 1;
         const updatedIngredients = {
@@ -71,7 +78,7 @@ class BurgerBuilder extends React.Component {
         }
         return (
             <Auxillary>
-                <Modal>
+                <Modal show={this.state.purchasing}>
                     <OrderSummary ingredients={this.state.ingredients} />
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
@@ -81,6 +88,7 @@ class BurgerBuilder extends React.Component {
                     disabled={disableInfo}
                     purchasable={this.state.purchasable}
                     price={this.state.totalPrice}
+                    ordered={this.purchaseHandler}
                 />
             </Auxillary>
         );
