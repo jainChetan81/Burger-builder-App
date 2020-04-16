@@ -11,6 +11,7 @@
 
 .OrderButton {
     background-color: #dad735;
+    margin: auto;
     outline: none;
     cursor: pointer;
     border: 1px solid #966909;

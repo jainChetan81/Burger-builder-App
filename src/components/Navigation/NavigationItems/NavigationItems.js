@@ -5,11 +5,10 @@ const NavigationItems = () => {
     return (
         <ul className={classes.NavigationItems}>
             <li>
-                active
                 <NavigationItem link="/" active>
                     Burger Builder
                 </NavigationItem>
-                <NavigationItem link="/">CHeckout</NavigationItem>
+                <NavigationItem link="/">Checkout</NavigationItem>
             </li>
         </ul>
     );
