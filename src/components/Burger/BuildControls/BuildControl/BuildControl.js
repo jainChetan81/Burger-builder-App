@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./BuildControl.css";
 
 export default function buildControl(props) {
-    console.log("props in buildControl.js is :", props);
     return (
         <div className={classes.BuildControl}>
             <div className={classes.Label}>{props.label}</div>

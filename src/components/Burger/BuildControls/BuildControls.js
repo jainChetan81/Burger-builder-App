@@ -21,7 +21,6 @@ const controls = [
     },
 ];
 export default function buildControls(props) {
-    console.log("props in buildcontrols.js: ", props);
     return (
         <div className={classes.BuildControls}>
             <p>

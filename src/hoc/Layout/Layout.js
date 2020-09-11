@@ -22,7 +22,6 @@ export class Layout extends Component {
         });
     };
     render() {
-        console.log("this.props in layout", this.prps);
         return (
             <Auxillary>
                 <SideDrawer
