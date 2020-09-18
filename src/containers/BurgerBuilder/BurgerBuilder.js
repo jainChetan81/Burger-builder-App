@@ -29,6 +29,7 @@ class BurgerBuilder extends React.Component {
         loading: false,
         error: false,
     };
+
     componentDidMount() {
         axios
             .get("https://burger-builder-2f6a1.firebaseio.com/ingredients.json")
@@ -48,6 +49,7 @@ class BurgerBuilder extends React.Component {
             purchasing: !this.state.purchasing,
         });
     };
+
     updatePurchaseState = (ingredients) => {
         console.log("before doing stuff with ingredients: ", ingredients);
         const sum = Object.keys(ingredients)
@@ -56,6 +58,7 @@ class BurgerBuilder extends React.Component {
         console.log(" after doing stuff with ingredients: ", sum);
         this.setState({ purchasable: sum > 0 });
     };
+
     addIngredientHandler = (type) => {
         const updatedCount = this.state.ingredients[type] + 1;
         const updatedIngredients = {
@@ -70,6 +73,7 @@ class BurgerBuilder extends React.Component {
         });
         this.updatePurchaseState(updatedIngredients);
     };
+
     removeIngredientHandler = (type) => {
         const oldCount = this.state.ingredients[type];
         if (oldCount <= 0) {
@@ -88,33 +92,14 @@ class BurgerBuilder extends React.Component {
         });
         this.updatePurchaseState(updatedIngredients);
     };
+
     purchaseCancelHandler = () => {
         this.setState({
             purchasing: false,
         });
     };
+
     purchaseContinueHandler = () => {
-        // this.setState({ loading: true });
-        // const order = {
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.totalPrice,
-        //     customer: {
-        //         name: "chetan Jain",
-        //         address: {
-        //             street: "old c1/36",
-        //             zipcode: "848125",
-        //             country: "India",
-        //         },
-        //         email: "jain.cj.chetan@gmail.com",
-        //     },
-        //     deliveryMethod: "fastest",
-        // };
-        // axios
-        //     .post("/orders.json", order)
-        //     .then((res) => this.setState({ loading: false, purchasing: false }))
-        //     .catch((err) =>
-        //         this.setState({ loading: false, purchasing: false })
-        //     );
         const queryParams = [];
         for (let i in this.state.ingredients) {
             queryParams.push(
@@ -123,12 +108,14 @@ class BurgerBuilder extends React.Component {
                     encodeURIComponent(this.state.ingredients[i])
             );
         }
+        queryParams.push("price=" + this.state.totalPrice);
         const queryString = queryParams.join("&");
         this.props.history.push({
             pathname: "/checkout",
             search: "?" + queryString,
         });
     };
+
     render() {
         const disableInfo = {
             ...this.state.ingredients,
