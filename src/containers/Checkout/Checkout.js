@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import ContactData from "./ContactData/ContactData";
 import { connect } from "react-redux";
 
@@ -11,7 +11,8 @@ class Checkout extends Component {
     onCheckoutContinued = () => {
         this.props.history.replace("/checkout/contact-data");
     };
-    // componentWillMount() {//todo:receiving url link queryParams
+
+    // componentWillMount() {//TODO:receiving url link queryParams
     //     const query = new URLSearchParams(this.props.location.search);
     //     let ingredients = {};
     //     let price = 0;
@@ -28,15 +29,22 @@ class Checkout extends Component {
     render() {
         return (
             <div>
-                <CheckoutSummary
-                    onCheckoutCanceled={this.onCheckoutCanceled}
-                    onCheckoutContinued={this.onCheckoutContinued}
-                    ingredients={this.props.ings}
-                />
-                <Route
-                    path={this.props.match.path + "/contact-data"}
-                    component={ContactData}
-                />
+                {/* {this.props.purchased ? <Redirect to="/" /> : null} */}
+                {this.props.ings ? (
+                    <div>
+                        <CheckoutSummary
+                            onCheckoutCanceled={this.onCheckoutCanceled}
+                            onCheckoutContinued={this.onCheckoutContinued}
+                            ingredients={this.props.ings}
+                        />
+                        <Route
+                            path={this.props.match.path + "/contact-data"}
+                            component={ContactData}
+                        />
+                    </div>
+                ) : (
+                    <Redirect to="/" />
+                )}
             </div>
         );
     }
@@ -44,9 +52,10 @@ class Checkout extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ings: state.ingredients,
-        price: state.totalPrice,
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        purchased: state.order.purchased,
     };
 };
 
-export default connect(mapStateToProps, null)(Checkout);
+export default connect(mapStateToProps)(Checkout);

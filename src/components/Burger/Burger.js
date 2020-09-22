@@ -10,7 +10,7 @@ const burger = (props) => {
             });
         })
         .reduce((arr, el) => {
-            return arr.concat(el); //todo: if values are zero then no array for each ingredient
+            return arr.concat(el); //TODO: if values are zero then no array for each ingredient
         }, []);
     if (transformedIngredients.length === 0) {
         transformedIngredients = <p>Please Start Adding Ingredients</p>;

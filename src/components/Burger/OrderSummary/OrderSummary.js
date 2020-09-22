@@ -3,8 +3,6 @@ import Auxillary from "../../../hoc/Auxillary/Auxillary";
 import Button from "../../UI/Button/Button";
 
 class OrderSummary extends Component {
-    componentWillUpdate(nextProps, nextState) {}
-
     render() {
         const ingredientSummary = Object.keys(this.props.ingredients).map(
             (igKey) => {
@@ -21,7 +19,7 @@ class OrderSummary extends Component {
         return (
             <Auxillary>
                 <h2>Your Order</h2>
-                <p>A deliciou sBurger with the following ingredients</p>
+                <p>A delicious Burger with the following ingredients</p>
                 <ul>{ingredientSummary}</ul>
                 <p>
                     <strong>Total Price: </strong>

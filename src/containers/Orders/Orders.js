@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Order from "../../components/Order/Order";
 import axios from "../../axios-orders";
-// import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Orders extends Component {
@@ -10,18 +10,7 @@ class Orders extends Component {
         loading: false,
     };
     componentDidMount() {
-        axios
-            .get("/orders.json")
-            .then((res) => {
-                let fetchOrders = [];
-                for (let key in res.data) {
-                    fetchOrders.push({ ...res.data[key], id: key });
-                }
-                this.setState({ loading: false, orders: fetchOrders });
-            })
-            .catch((err) => {
-                this.setState({ loading: false });
-            });
+        
     }
 
     render() {
@@ -42,5 +31,5 @@ class Orders extends Component {
         );
     }
 }
-export default Orders;
-// export default withErrorHandler(Orders, axios);
+// export default Orders;
+export default withErrorHandler(Orders, axios);

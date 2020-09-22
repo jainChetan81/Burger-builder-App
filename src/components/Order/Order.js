@@ -24,7 +24,7 @@ const Order = (props) => {
             <p>
                 Price :
                 <strong>INR {Number.parseFloat(props.price).toFixed(2)}</strong>
-                {/* //todo:to pass number into string */}
+                {/* //TODO:to pass number into string */}
             </p>
         </div>
     );

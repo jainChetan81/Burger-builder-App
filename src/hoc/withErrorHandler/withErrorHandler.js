@@ -1,5 +1,4 @@
-import React from "react";
-import { Component } from "react";
+import React, { Component } from "react";
 import Modal from "../../components/UI/Modal/Modal";
 import Auxillary from "../Auxillary/Auxillary";
 
@@ -8,13 +7,15 @@ const withErrorHandler = (WrapperComponent, axios) => {
         state = {
             error: null,
         };
+
         componentWillMount() {
-            this.reqInterceptors = axios.interceptors.request.use((req) => {
+            this.reqInterceptor = axios.interceptors.request.use((req) => {
                 this.setState({ error: null });
                 return req;
             });
-            this.resInterceptors = axios.interceptors.response.use(
-                (res) => null,
+
+            this.resInterceptor = axios.interceptors.response.use(
+                (res) => res,
                 (error) => {
                     this.setState({
                         error: error,
@@ -22,9 +23,11 @@ const withErrorHandler = (WrapperComponent, axios) => {
                 }
             );
         }
+
+        // doing this to prevent memory leaks
         componentWillUnmount() {
-            axios.interceptors.request.eject(this.reqInterceptors); //todo:to remove interceptors we don't need anymore
-            axios.interceptors.response.eject(this.resInterceptors);
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.response.eject(this.resInterceptor);
         }
 
         errorConfirmed = () => {
