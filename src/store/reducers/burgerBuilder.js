@@ -48,7 +48,7 @@ const burgerBuilderReducer = (state = initialState, action) => {
             };
 
         default:
-            return initialState;
+            return state;
     }
 };
 export default burgerBuilderReducer;

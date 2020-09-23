@@ -51,7 +51,7 @@ class BurgerBuilder extends React.Component {
         // queryParams.push("price=" + this.props.price);
         // const queryString = queryParams.join("&");
         // this.props.history.push({
-        // this.props.onInitPurchase();
+        this.props.onPurchaseInit();
         this.props.history.push("/checkout");
         // search: "?" + queryString,
         // });
@@ -111,6 +111,7 @@ const mapStateToProps = (state) => {
         price: state.burgerBuilder.totalPrice,
         error: state.burgerBuilder.error,
         loading: state.order.loading,
+        purchased: state.order.purchased,
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -119,15 +120,10 @@ const mapDispatchToProps = (dispatch) => {
         onIngredientRemove: (ingName) =>
             dispatch(actions.removeIngredient(ingName)),
         onInitIngredients: () => dispatch(actions.initIngredient()),
-        onInitPurchase: () => dispatch(actions.purchaseInit()),
-        // onSetIngredients: (ingredients) =>
-        //     dispatch(burgerBuilderActions.setIngredient(ingredients)),
-        // onIngredientFailed: (err) =>
-        //     dispatch(burgerBuilderActions.fetchIngredientsFailed(err)),
+        onPurchaseInit: () => dispatch(actions.purchaseInit()),
     };
 };
 export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(withErrorHandler(BurgerBuilder, axios)); //custom error handler
-// )(BurgerBuilder); //custom error handler

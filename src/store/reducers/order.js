@@ -17,23 +17,39 @@ const orderReducer = (state = initialState, action) => {
                 purchased: true,
                 orders: state.orders.concat(newOrder), //TODO:try using spread operator here
             };
-        case actionTypes.PURCHASE_BURGER_FAILS:
-            console.log("purchase burger fails");
+        case actionTypes.PURCHASE_BURGER_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.error,
             };
         case actionTypes.PURCHASE_BURGER_START:
-            console.log("action PURCHASE_BURGER_START", state);
             return {
                 ...state,
                 loading: true,
             };
         case actionTypes.PURCHASE_INIT: //TODO:fixed this
+            console.log("state", state);
             return {
                 ...state,
                 purchased: false,
+            };
+        case actionTypes.FETCH_ORDERS_START:
+            return {
+                ...state,
+                loading: true,
+            };
+        case actionTypes.FETCH_ORDERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                orders: action.orders,
+            };
+        case actionTypes.FETCH_ORDERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: true,
             };
 
         default:
