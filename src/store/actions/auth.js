@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
+import { firebaseKey } from "../../key";
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START,
@@ -76,7 +77,7 @@ export const auth = (email, password, method) => (dispatch) => {
     }
     axios
         .post(
-            `${urlAuth}${type}AIzaSyBugrUVP5U0RAmU9zx_jqZoB95SUfvzFwE`,
+            `${urlAuth}${type}${firebaseKey}`,
             authData
         )
         .then((res) => {
