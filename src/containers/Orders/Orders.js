@@ -8,7 +8,7 @@ import * as actions from "../../store/actions";
 
 class Orders extends Component {
     componentWillMount() {
-        this.props.onFetchOrders();
+        this.props.onFetchOrders(this.props.token);
         console.log(this.props.orders, this.props.orders === []);
     }
 
@@ -35,11 +35,12 @@ const mapStateToProps = (state) => {
         orders: state.order.orders,
         error: state.order.error,
         loading: state.order.loading,
+        token: state.auth.token,
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        onFetchOrders: () => dispatch(actions.fetchOrders()),
+        onFetchOrders: (token) => dispatch(actions.fetchOrders(token)),
     };
 };
 export default connect(

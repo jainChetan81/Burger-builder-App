@@ -40,7 +40,7 @@ export default function buildControls(props) {
                 // disabled={props.price <= 4}
                 className={classes.OrderButton}
                 onClick={props.ordered}>
-                ORDER NOW
+                {props.isAuth ? " ORDER NOW" : "SIGN IN TO ORDER"}
             </button>
         </div>
     );

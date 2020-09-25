@@ -25,7 +25,6 @@ export const fetchIngredientsFailed = (err) => {
     };
 };
 export const initIngredient = () => (dispatch) => {
-    console.log("initIngridients");
     axios
         .get("/ingredients.json")
         .then((res) => {

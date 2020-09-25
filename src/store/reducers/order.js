@@ -3,6 +3,7 @@ const initialState = {
     orders: [],
     loading: false,
     purchased: false,
+    error: null,
 };
 const orderReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -49,7 +50,7 @@ const orderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: true,
+                error: action.error,
             };
 
         default:
