@@ -28,7 +28,6 @@ export const authLogout = () => {
     };
 };
 export const checkAuthTimeout = (expiresIn) => {
-    console.log("expiresIn", expiresIn);
     return (dispatch) => {
         setTimeout(() => {
             dispatch(authLogout());
@@ -81,7 +80,6 @@ export const auth = (email, password, method) => (dispatch) => {
             authData
         )
         .then((res) => {
-            console.log("redux init: ", res.data);
             const expirationDate = new Date(
                 new Date().getTime() + res.data.expiresIn * 1000
             );

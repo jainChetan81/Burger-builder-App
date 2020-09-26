@@ -30,7 +30,6 @@ const orderReducer = (state = initialState, action) => {
                 loading: true,
             };
         case actionTypes.PURCHASE_INIT: //TODO:fixed this
-            console.log("state", state);
             return {
                 ...state,
                 purchased: false,

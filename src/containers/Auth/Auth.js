@@ -8,6 +8,7 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import * as actions from "../../store/actions";
 import classes from "./Auth.css";
 import { Redirect } from "react-router-dom";
+import { checkValidity } from "../../hoc/shared/checkValidity";
 
 class Auth extends Component {
     state = {
@@ -39,8 +40,8 @@ class Auth extends Component {
         isSignUp: true,
     };
     componentDidMount() {
-        if (!this.props.buildingBurger && this.props.authRedirectPath !== "/")
-            this.props.onSetAuthRedirect();
+        if (this.props.price === 4 && this.props.authRedirectPath !== "/")
+            this.props.onSetAuthRedirect("/");
     }
 
     switchAuthMode = () => {
@@ -53,31 +54,14 @@ class Auth extends Component {
         e.preventDefault();
         this.props.onAuth(email.value, password.value, this.state.isSignUp);
     };
-    checkValidity = (value, rules) => {
-        let isValid = true;
-        if (!rules) return true;
-        if (rules.required) isValid = value.trim() !== "" && isValid;
-        if (rules.minLength)
-            isValid = value.length >= rules.minLength && isValid;
-        if (rules.maxLength)
-            isValid = value.length <= rules.maxLength && isValid;
-        if (rules.isEmail) {
-            const pattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            isValid = pattern.test(value) && isValid;
-        }
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid;
-        }
-        return isValid;
-    };
+
     inputChangedHandler = (e, inputIdentifier) => {
         const updatedControlForm = {
             ...this.state.controls,
         };
         const updatedFormElement = { ...updatedControlForm[inputIdentifier] };
         updatedFormElement.value = e.target.value;
-        updatedFormElement.valid = this.checkValidity(
+        updatedFormElement.valid = checkValidity(
             updatedFormElement.value,
             updatedFormElement.validation
         );
@@ -151,13 +135,14 @@ const mapStateToProps = (state) => {
         isAuthenticated: state.auth.token !== null,
         buildingBurger: state.burgerBuilder.building,
         authRedirectPath: state.auth.authRedirect,
+        price: state.auth.totalPrice,
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         onAuth: (email, password, isSignUp) =>
             dispatch(actions.auth(email, password, isSignUp)),
-        onSetAuthRedirect: () => dispatch(actions.setAuthRedirect("/")),
+        onSetAuthRedirect: (path) => dispatch(actions.setAuthRedirect(path)),
     };
 };
 

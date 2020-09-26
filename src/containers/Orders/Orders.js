@@ -9,7 +9,6 @@ import * as actions from "../../store/actions";
 class Orders extends Component {
     componentWillMount() {
         this.props.onFetchOrders(this.props.token);
-        console.log(this.props.orders, this.props.orders === []);
     }
 
     render() {

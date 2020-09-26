@@ -28,7 +28,6 @@ export const initIngredient = () => (dispatch) => {
     axios
         .get("/ingredients.json")
         .then((res) => {
-            console.log("redux init: ", res.data);
             dispatch(setIngredient(res.data)); //TODO:make it work and implement
         })
         .catch((err) => {

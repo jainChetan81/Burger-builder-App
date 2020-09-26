@@ -21,6 +21,7 @@ class App extends Component {
                     {this.props.isAuthenticated ? (
                         <Switch>
                             <Route exact path="/" component={BurgerBuilder} />
+                            <Route exact path="/auth" component={Auth} />
                             <Route path="/checkout" component={Checkout} />
                             <Route exact path="/orders" component={Orders} />
                             <Route exact path="/logout" component={Logout} />
