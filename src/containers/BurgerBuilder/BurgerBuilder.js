@@ -10,16 +10,16 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 
-class BurgerBuilder extends React.Component {
-    state = {
-        purchasing: false,
-    };
-    componentWillMount() {
+export class BurgerBuilder extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { purchasing: false };
+    }
+    componentDidMount() {
         this.props.onInitIngredients();
     }
 
     purchaseHandler = () => {
-        // this.props.onInitPurchase();
         if (this.props.isAuthenticated)
             return this.setState({
                 purchasing: !this.state.purchasing,
