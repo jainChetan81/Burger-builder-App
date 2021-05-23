@@ -90,7 +90,7 @@ class Auth extends Component {
                 {this.props.isAuthenticated ? (
                     <Redirect to={this.props.authRedirectPath} />
                 ) : null}
-                <h4>{this.state.isSignUp ? "Sign Up" : "Sign IN"}</h4>
+                <h4>{this.state.isSignUp ? "Sign Up" : "Sign In"}</h4>
                 {this.props.error ? (
                     <p style={{ color: "red" }}>{this.props.error.message}</p>
                 ) : null}
